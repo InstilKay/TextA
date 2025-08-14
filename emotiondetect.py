@@ -1,4 +1,3 @@
-
 import os
 import re
 import string
@@ -62,9 +61,9 @@ ID_TO_EMOTION = {
 }
 EMOTIONS = [ID_TO_EMOTION[i] for i in range(7)]
 
-# -----------------------------
-# Text utils & embeddings
-# -----------------------------
+# ---------------------------------------
+# Text processing utilities & embeddings
+# ---------------------------------------
 def simple_tokenize(s: str):
     s = s.lower()
     s = s.translate(str.maketrans("", "", string.punctuation))
@@ -191,7 +190,7 @@ def train_ann(X_train, y_train, X_val, y_val, epochs=12, batch_size=128, hidden=
     return model, hist.history
 
 # -----------------------------
-# Evaluation helpers
+# Model Evaluation helpers
 # -----------------------------
 def evaluate_classifier(name, clf, X_test, y_test):
     y_prob = clf.predict_proba(X_test)
@@ -422,12 +421,12 @@ def run_app():
 
     # Final caption with icon (JPEG)
     icon_path = DATA_DIR / "2.jpg"  # Sabi
-    ICON_SIZE = 48
+    ICON_SIZE = 96
 
-    col_i, col_t = st.columns([1, 10])
+    col_i, col_t = st.columns([3, 20])
     with col_i:
         try:
-            st.image(icon_path, width=ICON_SIZE)  # small icon
+            st.image(str(icon_path), width=ICON_SIZE)  # small icon
         except Exception:
             st.write("")  # ignore if missing
     with col_t:
